@@ -1,0 +1,9 @@
+<h1>Recipes#index</h1>
+<p>Find me in app/views/recipes/index.html.erb</p>
+
+
+<% @recipes.each do |recipe| %>
+  <%= image_tag url_for(recipe.image) %>
+  <%= recipe.user.username %>
+  <%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %>
+<% end %>

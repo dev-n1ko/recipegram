@@ -16,12 +16,12 @@
           <div class="card">
             <div class="card-content">
               <div class="card-image">
-                <figure class="image">
+                <figure class="profile_image">
                   <%= link_to user_path(user) do %>
                     <% if user.image.attached? %>
-                        <%= image_tag user.image %>
+                        <%= image_tag user.image, class: "avatar" %>
                     <% else %>
-                        <%= image_tag "no-image.png", size: "300x300" %>
+                        <%= image_tag "no-image.png", class: "avatar" %>
                     <% end %>
                   <% end %>
                 </figure>
