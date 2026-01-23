@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:edit, :update, :show]
+  before_action :set_recipe, only: [:edit, :update, :show, :destroy]
   
   def index
     @recipes = Recipe.all
@@ -25,6 +25,11 @@ class RecipesController < ApplicationController
   def update
     @recipe.update(recipe_params)
     redirect_to recipe_path(@recipe)
+  end
+
+  def destroy
+    @recipe.destroy
+    redirect_to user_path(@recipe.user), notice: "レシピを削除しました"
   end
 
   private
