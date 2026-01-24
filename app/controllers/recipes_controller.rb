@@ -1,6 +1,8 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :show, :destroy]
-  
+  before_action :authenticate_user!, except: [:index]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+ 
   def index
     @recipes = Recipe.all
   end
@@ -15,16 +17,23 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
-    @recipe.save
-    redirect_to recipe_path(@recipe)
+    if @recipe.save
+      redirect_to recipe_path(@recipe), notice: "投稿に成功しました"
+    else
+      render :new
+    end
   end
 
   def edit
   end
 
+
   def update
-    @recipe.update(recipe_params)
-    redirect_to recipe_path(@recipe)
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe), notice: "更新に成功しました"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -40,6 +49,12 @@ class RecipesController < ApplicationController
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def correct_user
+    if @recipe.user != current_user
+      redirect_to recipes_path, alert: "不正なアクセスです"
+    end
   end
 
 end

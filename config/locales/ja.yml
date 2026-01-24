@@ -1,0 +1,22 @@
+ja:
+  errors:
+    format: "%{attribute}%{message}"
+
+    messages:
+      blank: "を入力してください"
+
+  activerecord:
+    errors:
+      format: "%{attribute}%{message}"
+
+    models:
+      recipe: レシピ
+
+    attributes:
+      recipe:
+        title: レシピ名
+        body: 作り方
+        image: 写真
+      user:
+        username: ユーザー名
+        email: メールアドレス

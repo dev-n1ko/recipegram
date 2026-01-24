@@ -35,6 +35,9 @@
                   <td>
                     <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
                   </td>
+                  <td>
+                    <%= link_to "削除", user_path(@user), data: {turbo_method: :delete, turbo_confirm: "削除しますか？"}, class: "button is-primary" %>
+                  </td>
                 <% end %>
               </tr>
             </table>
