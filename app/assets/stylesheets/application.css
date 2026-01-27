@@ -26,3 +26,13 @@
   background-repeat: none;
   background-size: contain;
 }
+
+.control.has-icons-left .input {
+  height: 2.5em;
+}
+
+.control.has-icons-left .icon {
+  top: 50%;
+  transform: translateY(-50%);
+  height: auto;
+}

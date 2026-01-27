@@ -23,9 +23,9 @@
               </span>
             </p>
 
-            <% resource.errors.full_messages_for(:email).each do |msg| %>
-              <p class="help is-danger"><%= msg %></p>
-            <% end %>
+            <p class="help is-danger">
+              <%= resource.errors.full_messages_for(:email).first || "&nbsp;".html_safe %>
+            </p>
           </div>
 
           <div class="field">
@@ -37,9 +37,9 @@
               </span>
             </p>
 
-            <% resource.errors.full_messages_for(:password).each do |msg| %>
-              <p class="help is-danger"><%= msg %></p>
-            <% end %>
+            <p class="help is-danger">
+              <%= resource.errors.full_messages_for(:password).first || "&nbsp;".html_safe %>
+            </p>
           </div>
 
           <% if devise_mapping.rememberable? %>
