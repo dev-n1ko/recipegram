@@ -14,31 +14,33 @@
       <div class="column is-6">
         <%= form_for @user, html: { multipart: true }, data: { turbo: false } do |f| %>
           <div class="field">
+            <%= f.label :username, "ユーザ名", class: "label" %>
+            <%= f.text_field :username, class: "input #{@user.errors[:username].any? ? 'is-danger' : ''}" %>
+
             <% if @user.errors[:username].any? %>
               <% @user.errors.full_messages_for(:username).each do |message| %>
                 <p class="help is-danger"><%= message %></p>
               <% end %>
             <% end %>
-
-            <%= f.label :username, "ユーザ名", class: "label" %>
-            <%= f.text_field :username, class: "input #{@user.errors[:username].any? ? 'is-danger' : ''}" %>
           </div>
 
           <div class="field">
+            <%= f.label :email, "メールアドレス", class: "label" %>
+            <%= f.text_field :email, class: "input #{@user.errors[:email].any? ? 'is-danger' : ''}" %>
+
             <% if @user.errors[:email].any? %>
               <% @user.errors.full_messages_for(:email).each do |message| %>
                 <p class="help is-danger"><%= message %></p>
               <% end %>
             <% end %>
-
-            <%= f.label :email, "メールアドレス", class: "label" %>
-            <%= f.text_field :email, class: "input #{@user.errors[:email].any? ? 'is-danger' : ''}" %>
           </div>
 
           <div class="field">
             <%= f.label :profile, "プロフィール", class: "label" %>
             <%= f.text_area :profile, class: "textarea" %>
           </div>
+
+          <%= image_tag @user.image, class: "avatar" %>
 
           <div class="field">
             <%= f.label :image, "プロフィール画像", class: "label" %>
