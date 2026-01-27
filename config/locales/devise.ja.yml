@@ -1,5 +1,14 @@
 ja:
   devise:
+    shared:
+      links:
+        sign_in: "ログインはこちら"
+        sign_up: "新規会員登録"
+        log_in: "ログイン"
+        forgot_your_password: "パスワードをお忘れですか？"
+        confirmation_instructions: "確認メールを再送する"
+        unlock_instructions: "アカウントロック解除"
+    
     sessions:
       signed_in: "ログインに成功しました"
       signed_out: "ログアウトしました"
