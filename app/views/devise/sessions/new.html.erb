@@ -17,21 +17,29 @@
           <div class="field">
             <%= f.label :email, class: "label" %>
             <p class="control has-icons-left">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: "input" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "email", class: input_class(resource, :email) %>
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
             </p>
+
+            <% resource.errors.full_messages_for(:email).each do |msg| %>
+              <p class="help is-danger"><%= msg %></p>
+            <% end %>
           </div>
 
           <div class="field">
             <%= f.label :password, class: "label" %>
             <p class="control has-icons-left">
-              <%= f.password_field :password, autocomplete: "current-password", :placeholder => "password", class: "input" %>
+              <%= f.password_field :password, autocomplete: "current-password", :placeholder => "password", class: input_class(resource, :password) %>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
             </p>
+
+            <% resource.errors.full_messages_for(:password).each do |msg| %>
+              <p class="help is-danger"><%= msg %></p>
+            <% end %>
           </div>
 
           <% if devise_mapping.rememberable? %>
