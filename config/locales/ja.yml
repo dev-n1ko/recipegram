@@ -20,3 +20,7 @@ ja:
       user:
         username: ユーザー名
         email: メールアドレス
+
+  time:
+    formats:
+      short: "%Y/%m/%d %H:%M"

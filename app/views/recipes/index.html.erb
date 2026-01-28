@@ -38,9 +38,14 @@
                   <div class="title"><%= link_to recipe.user.username, user_path(recipe.user) %></div>
                 </div>
               </div>
-
-              <div class="content">
-                <time><%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+              
+              <div class="content is-flex is-align-items-center is-justify-content-space-between">
+                <div>
+                  <time><%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+                </div>
+                <div>
+                  コメント数：<%= recipe.comments.count %>
+                </div>
               </div>
             </div>
           </div>

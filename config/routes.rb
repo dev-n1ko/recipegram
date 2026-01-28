@@ -4,5 +4,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   resources :users
-  resources :recipes
+
+  resources :recipes do
+    resources :comments, only: [:create, :destroy]
+  end
 end

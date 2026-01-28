@@ -34,6 +34,13 @@
   margin-top: 7px; /* ← ここで微調整 */
 }
 
+.media-left .avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .main-image {
   height: 940px;
   background-image: url(meal.png);
@@ -49,4 +56,18 @@
   top: 50%;
   transform: translateY(-50%);
   height: auto;
+}
+
+.box {
+  margin-bottom: 1rem;
+}
+
+.comment-content {
+  position: relative;
+}
+
+.comment-delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

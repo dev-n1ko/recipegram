@@ -58,6 +58,70 @@
             <%= @recipe.user.username %>さんのぺージへ
           <% end %>
         </article>
+        <h2 class="title is-5">コメント</h2>
+
+        <% if user_signed_in? %>
+          <%= form_with model: [@recipe, Comment.new], local: true do |f| %>
+            <div class="field">
+              <div class="control">
+                <%= f.text_area :content,
+                      class: "textarea",
+                      placeholder: "コメントを書く" %>
+              </div>
+            </div>
+
+            <div class="field">
+              <%= f.submit "投稿", class: "button is-success" %>
+            </div>
+          <% end %>
+        <% else %>
+          <p>コメントするにはログインしてください</p>
+        <% end %>
+
+        <% if @comments.any? %>
+          <% @comments.each do |comment| %>
+            <div class="box comment-box">
+              <article class="media">
+                <figure class="media-left">
+                  <%= link_to user_path(comment.user) do %>
+                    <% if comment.user.image.attached? %>
+                      <%= image_tag comment.user.image, class: "avatar" %>
+                    <% else %>
+                      <%= image_tag "no-image.png", class: "avatar" %>
+                    <% end %>
+                  <% end %>
+                </figure>
+
+                <div class="media-content comment-content">
+                  <div class="content">
+                    <p>
+                      <strong>
+                        <%= link_to comment.user.username, user_path(comment.user) %>
+                      </strong>
+                      <small class="has-text-grey">
+                        <%= l(comment.created_at, format: :short) %>
+                      </small>
+                      <br>
+                      <%= comment.content %>
+                    </p>
+                  </div>
+
+                  <% if comment.user == current_user %>
+                    <div class="comment-delete">  
+                      <%= link_to "削除",
+                        recipe_comment_path(@recipe, comment),
+                        method: :delete,
+                        data: { confirm: "削除しますか？" },
+                        class: "button is-small is-text has-text-danger" %>
+                    </div>
+                  <% end %>
+                </div>
+              </article>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="has-text-grey">まだコメントはありません</p>
+        <% end %>
       </div>
     </div>
   </div>
