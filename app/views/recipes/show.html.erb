@@ -110,8 +110,7 @@
                     <div class="comment-delete">  
                       <%= link_to "削除",
                         recipe_comment_path(@recipe, comment),
-                        method: :delete,
-                        data: { confirm: "削除しますか？" },
+                        data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
                         class: "button is-small is-text has-text-danger" %>
                     </div>
                   <% end %>
