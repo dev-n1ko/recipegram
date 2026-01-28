@@ -43,10 +43,19 @@
           <div class="navbar-item">
             <div class="field is-grouped">
               <p class="control">
-                <%= link_to "レシピグラマー一覧", users_path, class: " button is-warning is-light" %>
+                <%= link_to user_path(current_user) do %>
+                  <% if current_user.image.attached? %>
+                      <%= image_tag current_user.image, class: "header_avatar" %>
+                  <% else %>
+                      <%= image_tag "no-image.png", class: "header_avatar" %>
+                  <% end %>
+                <% end %>
               </p>
               <p class="control">
-                <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
+                <%= link_to current_user.username, user_path(current_user), class: "button is-warning is-light" %>
+              </p>
+              <p class="control">
+                <%= link_to "レシピグラマー一覧", users_path, class: " button is-warning is-light" %>
               </p>
               <p class="control">
                 <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>

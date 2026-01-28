@@ -20,6 +20,16 @@
   object-fit: cover;
 }
 
+.header_avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+
+  display: block;
+  margin-top: 7px; /* ← ここで微調整 */
+}
+
 .main-image {
   height: 940px;
   background-image: url(meal.png);
