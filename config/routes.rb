@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   resources :recipes do
     resources :comments, only: [:create, :destroy]
+    resources :memos, only: [:create, :update]
   end
 end

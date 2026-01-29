@@ -1,0 +1,9 @@
+<%= form_with model: [recipe, memo], local: true do |f| %>
+  <div class="field">
+    <%= f.text_area :content,
+        class: "textarea",
+        placeholder: "このレシピのメモ（自分だけ）" %>
+  </div>
+
+  <%= f.submit "保存", class: "button is-primary" %>
+<% end %>
