@@ -26,67 +26,81 @@
       </div>
     <% end %>
 
-    <%= link_to root_path, class: "navbar-item" do %>
-      <h1 class="title is-4" style="font-family: cursive;">recipegram</h1>
-    <% end %>
+    <nav class="navbar" data-controller="navbar">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-4" style="font-family: cursive;">recipegram</h1>
+        <% end %>
 
-    <% if user_signed_in? %>
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-        <div class="navbar-item">
-          <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
-        </div>
-        <div class="navbar-item">
-          <%= link_to "レシピ投稿", new_recipe_path, class: "navbar-item button is-warning is-light" %>
-        </div>
+        <!-- ハンバーガー -->
+        <a role="button"
+          class="navbar-burger"
+          data-action="click->navbar#toggle"
+          data-navbar-target="burger"
+          aria-label="menu"
+          aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      </div>
 
-        <div class="navbar-end">
+    
+      <div id="navbarExampleTransparentExample" class="navbar-menu" data-navbar-target="menu">
+        <% if user_signed_in? %>
           <div class="navbar-item">
-            <div class="field is-grouped">
-              <p class="control">
-                <%= link_to user_path(current_user) do %>
-                  <% if current_user.image.attached? %>
-                      <%= image_tag current_user.image, class: "header_avatar" %>
-                  <% else %>
-                      <%= image_tag "no-image.png", class: "header_avatar" %>
+            <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "レシピ投稿", new_recipe_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <%= link_to user_path(current_user) do %>
+                    <% if current_user.image.attached? %>
+                        <%= image_tag current_user.image, class: "header_avatar" %>
+                    <% else %>
+                        <%= image_tag "no-image.png", class: "header_avatar" %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </p>
-              <p class="control">
-                <%= link_to current_user.username, user_path(current_user), class: "button is-warning is-light" %>
-              </p>
-              <p class="control">
-                <%= link_to "レシピグラマー一覧", users_path, class: " button is-warning is-light" %>
-              </p>
-              <p class="control">
-                <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
-              </p>
+                </p>
+                <p class="control">
+                  <%= link_to current_user.username, user_path(current_user), class: "button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "レシピグラマー一覧", users_path, class: " button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    <% else %>
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-        <div class="navbar-item">
-          <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
-        </div>
-        <div class="navbar-item">
-              <%= link_to "レシピグラマー一覧", users_path, class: "navbar-item button is-warning is-light" %>
-        </div>
-        <div class="navbar-end">
+        <% else %>
           <div class="navbar-item">
-            <div class="field is-grouped">
-              <p class="control">
-                <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
-              </p>
-              <p class="control">
-                <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
-              </p>
+            <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+                <%= link_to "レシピグラマー一覧", users_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
-     <% end %>
-
+    </nav>
     <%= yield %>
   </body>
 </html>
