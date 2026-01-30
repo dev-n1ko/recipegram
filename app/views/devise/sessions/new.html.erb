@@ -30,11 +30,25 @@
 
           <div class="field">
             <%= f.label :password, class: "label" %>
-            <p class="control has-icons-left">
-              <%= f.password_field :password, autocomplete: "current-password", :placeholder => "password", class: input_class(resource, :password) %>
+
+            <p class="control has-icons-left has-icons-right" data-controller="pw">
+              <%= f.password_field :password, 
+                    autocomplete: "current-password", 
+                    placeholder: "password", 
+                    class: input_class(resource, :password),
+                    data: { pw_target: "input" } %>
+
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
+
+              <button type="button"
+                class="icon is-small is-right password-toggle"
+                data-action="click->pw#toggle"
+                data-pw-target="icon"
+                aria-label="パスワードを表示">
+                <i class="fas fa-eye"></i>
+              </button>
             </p>
 
             <p class="help is-danger">
