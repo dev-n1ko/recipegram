@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["input", "icon"]
 
   toggle() {
-    console.log("hoge")
     const icon = this.iconTarget.querySelector("i")
 
     if (this.inputTarget.type === "password") {
