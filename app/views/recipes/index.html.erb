@@ -28,29 +28,37 @@
               </figure>
             </div>
             <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
+              <!-- レシピ名 -->
+              <p class="title is-4 mb-2">
+                <%= recipe.title %>
+              </p>
+
+              <!-- 本文 -->
+              <div class="content mb-4">
+                <%= truncate(recipe.body, length: 80) %>
+              </div>
+
+              <div class="has-text-right">
+                <div class="user-info-column">
+
+                  <div class="is-flex is-justify-content-flex-end">
                     <%= link_to user_path(recipe.user) do %>
                       <% if recipe.user.image.attached? %>
-                        <%= image_tag recipe.user.image, class: "avatar" %>
+                        <%= image_tag recipe.user.image, class: "avatar-small" %>
                       <% else %>
-                        <%= image_tag "no-image.png", class: "avatar" %>
+                        <%= image_tag "no-image.png", class: "avatar-small" %>
                       <% end %>
+                      <span><%= recipe.user.username %></span>
                     <% end %>
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <div class="title"><%= link_to recipe.user.username, user_path(recipe.user) %></div>
-                </div>
-              </div>
+                  </div>
               
-              <div class="content is-flex is-align-items-center is-justify-content-space-between">
-                <div>
-                  <time><%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
-                </div>
-                <div>
-                  コメント数：<%= recipe.comments.count %>
+                  <div class="is-size-7 has-text-grey">
+                    <%= l(recipe.updated_at, format: :short) %>更新
+                  </div>
+                  
+                  <div class="is-size-7 has-text-grey">
+                    コメント数：<%= recipe.comments.size %>
+                  </div>
                 </div>
               </div>
             </div>
