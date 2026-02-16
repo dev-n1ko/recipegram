@@ -4,7 +4,10 @@ class RecipesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
  
   def index
-    @recipes = Recipe.includes(:user, :comments).search(params[:keyword])
+    @recipes = Recipe
+    .with_attached_image
+    .includes(user: { image_attachment: :blob })
+    .search(params[:keyword])
   end
 
   def show
