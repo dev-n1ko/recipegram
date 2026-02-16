@@ -8,6 +8,16 @@ class Recipe < ApplicationRecord
   validates :body, presence: true
   validate :image_presence
 
+  def self.search(keyword)
+    if keyword.present?
+      joins(:user).where(
+        "recipes.title LIKE :keyword OR recipes.body LIKE :keyword OR users.username LIKE :keyword",
+        keyword: "%#{keyword}"
+      )
+    else
+      all
+    end
+  end
 
 private
 

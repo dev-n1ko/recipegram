@@ -55,6 +55,29 @@
             <%= link_to "レシピ投稿", new_recipe_path, class: "navbar-item button is-warning is-light" %>
           </div>
 
+          <!-- 検索バー（中央寄せ） -->
+          <div class="navbar-item is-expanded">
+            <div class="navbar-item is-flex-grow-1 is-justify-content-center">
+              <%= form_with url: recipes_path, method: :get, local: true, class: "field has-addons search-form" do |f| %>
+
+                <div class="control has-icons-left is-expanded">
+                  <%= f.text_field :keyword,
+                        value: params[:keyword],
+                        placeholder: "レシピを検索...",
+                        class: "input is-rounded" %>
+                  <span class="icon is-left">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+
+                <div class="control">
+                  <%= f.submit "検索", class: "button is-info is-rounded" %>
+                </div>
+
+              <% end %>
+            </div>
+          </div>
+
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="field is-grouped">
@@ -86,6 +109,30 @@
           <div class="navbar-item">
                 <%= link_to "レシピグラマー一覧", users_path, class: "navbar-item button is-warning is-light" %>
           </div>
+
+          <!-- 検索バー（中央寄せ） -->
+          <div class="navbar-item is-expanded">
+            <div class="navbar-item is-flex-grow-1 is-justify-content-center">
+              <%= form_with url: recipes_path, method: :get, local: true, class: "field has-addons search-form" do |f| %>
+
+                <div class="control has-icons-left is-expanded">
+                  <%= f.text_field :keyword,
+                        value: params[:keyword],
+                        placeholder: "レシピを検索...",
+                        class: "input is-rounded" %>
+                  <span class="icon is-left">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+
+                <div class="control">
+                  <%= f.submit "検索", class: "button is-info is-rounded" %>
+                </div>
+
+              <% end %>
+            </div>
+          </div>
+
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="field is-grouped">

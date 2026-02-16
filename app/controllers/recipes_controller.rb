@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
  
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.search(params[:keyword])
   end
 
   def show
