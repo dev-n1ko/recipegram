@@ -8,6 +8,12 @@
   </div>
 </section>
 
+<% if params[:keyword].present? %>
+  <h2 class="title is-4">
+    「<%= params[:keyword] %>」の検索結果
+  </h2>
+<% end %>
+
 <section class="section">
   <div class="container">
     <div class="columns is-multiline">
