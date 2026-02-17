@@ -99,3 +99,39 @@
   max-width: 500px;
   margin: 0 auto;
 }
+
+.recipe-body {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* column内でカードを同じ高さにする */
+.columns.is-multiline {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column.is-4 {
+  display: flex;
+}
+
+/* カードを縦方向flexにする */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* card-contentを伸ばす */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* 本文部分を伸縮エリアにする */
+.recipe-body {
+  flex-grow: 1;
+}

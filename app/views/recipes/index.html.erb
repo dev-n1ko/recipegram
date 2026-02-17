@@ -35,7 +35,9 @@
 
               <!-- 本文 -->
               <div class="content mb-4">
-                <%= truncate(recipe.body, length: 80) %>
+                <p class="recipe-body">
+                  <%= recipe.body %>
+                </p>
               </div>
 
               <div class="has-text-right">
