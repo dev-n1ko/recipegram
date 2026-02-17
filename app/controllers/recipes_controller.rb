@@ -11,9 +11,14 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @recipe = Recipe
+    .with_attached_image
+    .find(params[:id])
+
     @comments = @recipe.comments
     .includes(user: { image_attachment: :blob })
     .order(created_at: :desc)
+
     @memo = Memo.find_or_initialize_by(recipe: @recipe, user: current_user)
   end
 
