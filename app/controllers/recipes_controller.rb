@@ -11,7 +11,9 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @comments = @recipe.comments.order(created_at: :desc)
+    @comments = @recipe.comments
+    .includes(user: { image_attachment: :blob })
+    .order(created_at: :desc)
     @memo = Memo.find_or_initialize_by(recipe: @recipe, user: current_user)
   end
 

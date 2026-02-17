@@ -1,13 +1,19 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User
+    .with_attached_image
+    .all
   end
 
   def show
+    @user = User
+    .with_attached_image
+    .includes(recipes: { image_attachment: :blob })
+    .find(params[:id])
   end
 
   def edit
