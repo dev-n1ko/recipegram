@@ -38,6 +38,40 @@
                   <td>
                     <%= link_to "削除", user_path(@user), data: {turbo_method: :delete, turbo_confirm: "削除しますか？"}, class: "button is-primary" %>
                   </td>
+                  <td>
+                    <div data-controller="modal">
+                      <button class="button is-light"
+                              data-action="click->modal#open">
+                        ❤️ お気に入り一覧
+                      </button>
+
+                      <!-- モーダル -->
+                      <div class="modal"
+                          data-modal-target="window"
+                          data-action="click->modal#backgroundClose keydown@window->modal#escClose">
+
+                        <div class="modal-background"></div>
+
+                        <div class="modal-content box">
+                          <!-- ×ボタン -->
+                          <button class="delete"
+                                  data-action="click->modal#close"></button>
+
+                          <h2 class="title is-4">お気に入りレシピ</h2>
+
+                          <% if @user.favorite_recipes.any? %>
+                            <% @user.favorite_recipes.each do |recipe| %>
+                              <div>
+                                <%= link_to recipe.title, recipe_path(recipe) %>
+                              </div>
+                            <% end %>
+                          <% else %>
+                            まだありません
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 <% end %>
               </tr>
             </table>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy, :favorites]
   before_action :authenticate_user!, except: [:index]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -31,6 +31,11 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to recipes_path, notice: "ユーザーを削除しました"
   end
+
+  def favorites
+    @favorite_recipes = @user.favorite_recipes
+  end
+    
 
   private
 
