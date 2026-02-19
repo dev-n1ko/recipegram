@@ -130,3 +130,45 @@
 .recipe-card-footer {
   margin-top: auto;
 }
+
+.favorite-area {
+  min-height: 30px;
+}
+
+.favorite-card {
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.favorite-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* カード全体リンク */
+.stretched-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ユーザーリンクは上に出す */
+.user-link {
+  position: relative;
+  z-index: 2;
+}
+
+.favorite-recipe-image {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.favorite-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}

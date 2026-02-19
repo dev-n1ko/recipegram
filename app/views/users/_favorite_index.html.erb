@@ -1,0 +1,38 @@
+<h2 class="title is-4">お気に入りレシピ</h2>
+
+<% if user.favorite_recipes.any? %>
+  <% user.favorite_recipes.each do |recipe| %>
+    <div class="favorite-item box">
+      
+      <%= link_to "", recipe_path(recipe), class: "stretched-link" %>
+
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag recipe.image, class: "favorite-recipe-image" %>
+        </div>
+
+        <div class="media-content">
+          <p class="title is-5 mb-2">
+            <%= recipe.title %>
+          </p>
+      
+          <%= link_to user_path(recipe.user), class: "is-flex is-align-items-center user-link" do %>
+            <% if recipe.user.image.attached? %>
+              <%= image_tag recipe.user.image, class: "favorite-avatar mr-2" %>
+            <% else %>
+              <%= image_tag "no-image.png", class: "favorite-avatar mr-2" %>
+            <% end %>  
+            
+            <span class="is-size-7 has-text-grey">
+              <%= recipe.user.username %>
+            </span>
+
+          <% end %>
+          
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  まだありません
+<% end %>

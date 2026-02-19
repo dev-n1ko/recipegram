@@ -56,18 +56,7 @@
                           <!-- ×ボタン -->
                           <button class="delete"
                                   data-action="click->modal#close"></button>
-
-                          <h2 class="title is-4">お気に入りレシピ</h2>
-
-                          <% if @user.favorite_recipes.any? %>
-                            <% @user.favorite_recipes.each do |recipe| %>
-                              <div>
-                                <%= link_to recipe.title, recipe_path(recipe) %>
-                              </div>
-                            <% end %>
-                          <% else %>
-                            まだありません
-                          <% end %>
+                          <%= render "favorite_index", user: @user %>
                         </div>
                       </div>
                     </div>

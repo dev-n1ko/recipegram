@@ -10,10 +10,21 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User
-    .with_attached_image
-    .includes(recipes: { image_attachment: :blob })
-    .find(params[:id])
+    base_query = User.with_attached_image
+                    .includes(recipes: { image_attachment: :blob })
+
+    if current_user && current_user.id == params[:id].to_i
+      @user = base_query
+              .includes(
+                favorite_recipes: [
+                  { image_attachment: :blob },
+                  { user: { image_attachment: :blob } }
+                ]
+              )
+              .find(params[:id])
+    else
+      @user = base_query.find(params[:id])
+    end
   end
 
   def edit
