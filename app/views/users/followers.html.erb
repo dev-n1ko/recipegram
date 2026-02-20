@@ -1,0 +1,20 @@
+<h2><%= @user.username %> のフォロワー一覧</h2>
+
+<% if @users.any? %>
+  <% @users.each do |user| %>
+    <%= link_to user_path(user), class: "is-flex is-align-items-center user-link" do %>
+      <% if user.image.attached? %>
+        <%= image_tag user.image, class: "favorite-avatar mr-2" %>
+      <% else %>
+        <%= image_tag "no-image.png", class: "favorite-avatar mr-2" %>
+      <% end %>  
+      
+      <span >
+        <%= user.username %>
+      </span>
+
+    <% end %>
+  <% end %>
+<% else %>
+  まだいません
+<% end %>

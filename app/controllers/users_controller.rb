@@ -46,7 +46,28 @@ class UsersController < ApplicationController
   def favorites
     @favorite_recipes = @user.favorite_recipes
   end
-    
+
+  def follow
+    @user = User.find(params[:id])
+    current_user.follow(@user)
+    redirect_to @user
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.unfollow(@user)
+    redirect_to @user
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers.includes(image_attachment: :blob)
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following.includes(image_attachment: :blob)
+  end
 
   private
 

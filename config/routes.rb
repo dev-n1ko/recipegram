@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :favorites
+      post :follow
+      delete :unfollow
+      get :following
+      get :followers
     end
   end
 

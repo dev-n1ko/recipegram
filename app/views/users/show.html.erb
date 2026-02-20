@@ -64,6 +64,24 @@
                 <% end %>
               </tr>
             </table>
+
+            <% unless current_user == @user %>
+              <% if current_user.following?(@user) %>
+                <%= button_to "フォロー解除",
+                      unfollow_user_path(@user),
+                      method: :delete,
+                      class: "button is-light" %>
+              <% else %>
+                <%= button_to "フォローする",
+                      follow_user_path(@user),
+                      method: :post,
+                      class: "button is-primary" %>
+              <% end %>
+            <% end %>
+
+            <%= link_to "フォロー中 #{@user.following_count}", following_user_path(@user) %>
+            <%= link_to "フォロワー #{@user.followers_count}", followers_user_path(@user) %>
+
             <table class="table is-fullwidth">
               <tr>
                 <td>
