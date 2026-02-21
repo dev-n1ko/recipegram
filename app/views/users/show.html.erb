@@ -56,7 +56,7 @@
                           <!-- ×ボタン -->
                           <button class="delete"
                                   data-action="click->modal#close"></button>
-                          <%= render "favorite_index", user: @user %>
+                          <%= render "favorite_index", favorite_recipes: @favorite_recipes %>
                         </div>
                       </div>
                     </div>
@@ -99,7 +99,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-multiline">
-      <% @user.recipes.each do |recipe| %>
+      <% @recipes.each do |recipe| %>
         <div class="column is-4">
           <div class="card">
             <div class="card-image">
