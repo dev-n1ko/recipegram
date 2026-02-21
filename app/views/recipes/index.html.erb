@@ -61,7 +61,7 @@
                     </div>
                     <br>
                     <div class="favorite-area">
-                      <% if recipe.user.id != current_user.id %>
+                      <% if recipe.user != current_user %>
                         <%= render "favorite", recipe: recipe %>
                       <% end %>
                     </div>

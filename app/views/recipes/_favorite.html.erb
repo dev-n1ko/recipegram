@@ -1,12 +1,20 @@
 <%= turbo_frame_tag "favorite_#{recipe.id}" do %>
-  <% if current_user.favorited?(recipe) %>
-    <%= button_to recipe_favorite_path(recipe),
-        method: :delete do %>
-      ❤️ <%= recipe.favorites_count %>
+  <% if user_signed_in? %>
+    <% if current_user.favorited?(recipe) %>
+      <%= button_to recipe_favorite_path(recipe),
+          method: :delete do %>
+        ❤️ <%= recipe.favorites_count %>
+      <% end %>
+    <% else %>
+      <%= button_to recipe_favorite_path(recipe),
+          method: :post do %>
+        🤍 <%= recipe.favorites_count %>
+      <% end %>
     <% end %>
   <% else %>
     <%= button_to recipe_favorite_path(recipe),
-        method: :post do %>
+        method: :post,
+        data: { turbo: false } do %>
       🤍 <%= recipe.favorites_count %>
     <% end %>
   <% end %>
