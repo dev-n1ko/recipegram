@@ -6,9 +6,13 @@ class Recipe < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
 
+  enum status: { draft: 0, published: 1 }
+
   validates :title, presence: true
   validates :body, presence: true
   validate :image_presence
+  validates :title, presence: true, if: :published?
+  validates :body,  presence: true, if: :published?
 
   def self.search(keyword)
     if keyword.present?

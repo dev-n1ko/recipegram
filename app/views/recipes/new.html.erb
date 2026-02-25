@@ -46,7 +46,23 @@
             <% end %>
           </div>
 
-          <%= f.submit "投稿", class: "button is-success" %>
+          <div class="field is-grouped">
+            <div class="control">
+              <%= button_tag "公開する",
+                    type: "submit",
+                    name: "recipe[status]",
+                    value: "published",
+                    class: "button is-success" %>
+            </div>
+
+            <div class="control">
+              <%= button_tag "下書きを保存する",
+                    type: "submit",
+                    name: "recipe[status]",
+                    value: "draft",
+                    class: "button is-light" %>
+            </div>
+          </div>       
         <% end %>
       </div>
     </div>

@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
  
   def index
-    @recipes = Recipe
+    @recipes = Recipe.published
     .with_attached_image
     .includes(user: { image_attachment: :blob })
     .search(params[:keyword])
@@ -28,10 +28,14 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user_id = current_user.id
+     @recipe = current_user.recipes.new(recipe_params)
+
     if @recipe.save
-      redirect_to recipe_path(@recipe), notice: "投稿に成功しました"
+      if @recipe.draft?
+        redirect_to user_path(current_user), notice: "下書きを保存しました"
+      else
+        redirect_to recipe_path(@recipe), notice: "投稿に成功しました"
+      end
     else
       render :new
     end
@@ -42,8 +46,14 @@ class RecipesController < ApplicationController
 
 
   def update
+    @recipe = current_user.recipes.find(params[:id])
+
     if @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe), notice: "更新に成功しました"
+      if @recipe.draft?
+        redirect_to user_path(current_user), notice: "下書きに戻しました"
+      else
+        redirect_to recipe_path(@recipe), notice: "公開しました"
+      end
     else
       render :edit
     end
@@ -57,7 +67,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :body, :image)
+    params.require(:recipe).permit(:title, :body, :image, :status)
   end
 
   def set_recipe

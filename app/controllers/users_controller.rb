@@ -11,14 +11,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.with_attached_image
-                .includes(recipes: { image_attachment: :blob })
                 .find(params[:id])
 
     @favorite_recipes = @user.favorite_recipes
                             .with_attached_image
                             .includes(user: { image_attachment: :blob })
     
-    @recipes = @user.recipes
+    if @user == current_user 
+      @recipes = @user.recipes.with_attached_image 
+    else 
+      @recipes = @user.recipes.published.with_attached_image 
+    end 
   end
 
   def edit
