@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update, :show, :destroy]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
  
   def index
@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
     .with_attached_image
     .includes(user: { image_attachment: :blob })
     .search(params[:keyword])
+    .order(created_at: :desc)
   end
 
   def show
