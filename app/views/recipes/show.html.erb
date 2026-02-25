@@ -19,9 +19,7 @@
             </figure>
           </div>
           <div class="card-content">
-            <% if @recipe.user.id != current_user.id %>
-              <%= render "favorite", recipe: @recipe %>
-            <% end %>
+            <%= render "favorite", recipe: @recipe %>
 
             <div class="media">
               <div class="media-content">
@@ -47,20 +45,19 @@
 
       <div class="column is-4">
         <article class="panel is-link">
-          <p class="panel-heading">
-            By <%= @recipe.user.username %>
-          </p>
+          <%= link_to user_path(@recipe.user), class: "panel-block" do %>
+            <% if @recipe.user.image.attached? %>
+              <%= image_tag @recipe.user.image, class: "avatar-small mr-2" %>
+            <% else %>
+              <%= image_tag "no-image.png", class: "avatar-small mr-2" %>
+            <% end %>
+            <span><%= @recipe.user.username %></span>
+          <% end %>
           <div class="panel-block">
             <p class="control">
               <%= @recipe.user.profile %>
             </p>
           </div>
-          <%= link_to user_path(@recipe.user), class: "panel-block" do %>
-            <span class="panel-icon">
-              <i class="fas fa-user" aria-hidden="true"></i>
-            </span>
-            <%= @recipe.user.username %>さんのぺージへ
-          <% end %>
         </article>
         
         <div data-controller="tab">
