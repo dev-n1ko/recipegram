@@ -109,36 +109,46 @@
                 <% end %>
               </figure>
             </div>
+
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                  <p class="title is-4 mb-2">
-                    <%= recipe.title %>
-                  </p>
                   <%= link_to recipe_path(recipe), class: "panel-block" do %>
-                    <span class="panel-icon">
-                      <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-                    このレシピを見る
+                    <p class="title is-4 mb-2">
+                      <%= recipe.title %>
+                    </p>
                   <% end %>
-                  <% if @user == current_user %>
-                    <%= link_to edit_recipe_path(recipe), class: "panel-block" do %>
-                      <span class="panel-icon">
-                        <i class="fas fa-edit"></i>
-                      </span>
-                      このレシピを編集する
-                    <% end %>
-                    <%= link_to recipe_path(recipe), data: {turbo_method: :delete, turbo_confirm: "削除しますか？"}, class: "panel-block" do %>
-                      <span class="panel-icon">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                      このレシピを削除する
-                    <% end %>
-                  <% end %>
+                  <div class="content mb-4">
+                    <p class="recipe-body">
+                      <%= recipe.body %>
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="content">
                 <time><%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+              </div>
+
+              <div class="is-flex is-justify-content-space-between is-align-items-center">
+                <div class="favorite-area">
+                  ❤️<%= recipe.favorites_count %>
+                </div>
+
+                <% if @user == current_user %>
+                  <div class="buttons are-small">
+                    <%= link_to edit_recipe_path(recipe), class: "button is-light" do %>
+                      <span class="icon">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                    <% end %>
+                  
+                    <%= link_to recipe_path(recipe), data: {turbo_method: :delete, turbo_confirm: "削除しますか？"}, class: "button is-light" do %>
+                      <span class="icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
