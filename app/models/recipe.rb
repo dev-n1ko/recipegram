@@ -25,6 +25,11 @@ class Recipe < ApplicationRecord
     end
   end
 
+  scope :latest, -> { order(updated_at: :desc) }
+  scope :oldest, -> { order(updated_at: :asc) }
+  scope :most_favorited, -> { order(favorites_count: :desc) }
+
+  
 private
 
   def image_presence

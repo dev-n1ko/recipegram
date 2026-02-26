@@ -18,10 +18,22 @@ class UsersController < ApplicationController
                             .includes(user: { image_attachment: :blob })
     
     if @user == current_user 
-      @recipes = @user.recipes.with_attached_image 
+      recipes = @user.recipes.with_attached_image 
     else 
-      @recipes = @user.recipes.published.with_attached_image 
+      recipes = @user.recipes.published.with_attached_image 
     end 
+
+    @recipes = case params[:sort]
+             when "favorites"
+               recipes.most_favorited
+             when "old"
+               recipes.oldest
+             else
+               recipes.latest
+             end
+              
+
+
   end
 
   def edit

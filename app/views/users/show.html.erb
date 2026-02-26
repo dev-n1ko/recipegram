@@ -96,70 +96,89 @@
   </div>
 </section>
 
+<div class="buttons">
+  <%= link_to "更新日順", 
+  user_path(@user, sort: "new"), 
+  data: { turbo_frame: "recipes_list" },
+  class: "button is-light" %>
+  
+  <%= link_to "古い順", 
+  user_path(@user, sort: "old"), 
+  data: { turbo_frame: "recipes_list" },
+  class: "button is-light" %>
+  
+  <%= link_to "ハート順",
+   user_path(@user, sort: "favorites"), 
+   data: { turbo_frame: "recipes_list" },
+   class: "button is-light" %>
+</div>
+
 <section class="section">
   <div class="container">
-    <div class="columns is-multiline">
-      <% @recipes.each do |recipe| %>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3 recipe-image-wrapper">
-                <%= link_to recipe_path(recipe) do %>
-                  <%= image_tag recipe.image %>
+    <%= turbo_frame_tag "recipes_list" do %>
+      <div class="columns is-multiline">
+        <% @recipes.each do |recipe| %>
+          <div class="column is-4">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3 recipe-image-wrapper">
+                  <%= link_to recipe_path(recipe) do %>
+                    <%= image_tag recipe.image %>
 
-                  <% if recipe.draft? %>
-                    <div class="draft-label">
-                      下書き
+                    <% if recipe.draft? %>
+                      <div class="draft-label">
+                        下書き
+                      </div>
+                    <% end %>
+                  <% end %>
+                </figure>
+              </div>
+
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <%= link_to recipe_path(recipe), class: "panel-block" do %>
+                      <p class="title is-4 mb-2">
+                        <%= recipe.title %>
+                      </p>
+                    <% end %>
+                    <div class="content mb-4">
+                      <p class="recipe-body">
+                        <%= recipe.body %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="content">
+                  <time><%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+                </div>
+
+                <div class="is-flex is-justify-content-space-between is-align-items-center">
+                  <div class="favorite-area">
+                    ❤️<%= recipe.favorites_count %>
+                  </div>
+
+                  <% if @user == current_user %>
+                    <div class="buttons are-small">
+                      <%= link_to edit_recipe_path(recipe), class: "button is-light" do %>
+                        <span class="icon">
+                          <i class="fas fa-edit"></i>
+                        </span>
+                      <% end %>
+                    
+                      <%= link_to recipe_path(recipe), data: {turbo_method: :delete, turbo_confirm: "削除しますか？"}, class: "button is-light" do %>
+                        <span class="icon">
+                          <i class="fas fa-trash"></i>
+                        </span>
+                      <% end %>
                     </div>
                   <% end %>
-                <% end %>
-              </figure>
-            </div>
-
-            <div class="card-content">
-              <div class="media">
-                <div class="media-content">
-                  <%= link_to recipe_path(recipe), class: "panel-block" do %>
-                    <p class="title is-4 mb-2">
-                      <%= recipe.title %>
-                    </p>
-                  <% end %>
-                  <div class="content mb-4">
-                    <p class="recipe-body">
-                      <%= recipe.body %>
-                    </p>
-                  </div>
                 </div>
-              </div>
-              <div class="content">
-                <time><%= recipe.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
-              </div>
-
-              <div class="is-flex is-justify-content-space-between is-align-items-center">
-                <div class="favorite-area">
-                  ❤️<%= recipe.favorites_count %>
-                </div>
-
-                <% if @user == current_user %>
-                  <div class="buttons are-small">
-                    <%= link_to edit_recipe_path(recipe), class: "button is-light" do %>
-                      <span class="icon">
-                        <i class="fas fa-edit"></i>
-                      </span>
-                    <% end %>
-                  
-                    <%= link_to recipe_path(recipe), data: {turbo_method: :delete, turbo_confirm: "削除しますか？"}, class: "button is-light" do %>
-                      <span class="icon">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    <% end %>
-                  </div>
-                <% end %>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-     </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </section>
