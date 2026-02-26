@@ -15,25 +15,35 @@ class Recipe < ApplicationRecord
   validates :body,  presence: true, if: :published?
 
   def self.search(keyword)
-    if keyword.present?
-      joins(:user).where(
-        "recipes.title LIKE :keyword OR recipes.body LIKE :keyword OR users.username LIKE :keyword",
-        keyword: "%#{keyword}"
-      )
-    else
-      all
-    end
+    return all if keyword.blank?
+
+    hira = Moji.kata_to_hira(keyword)
+
+    joins(:user).where(
+      "recipes.title LIKE :q
+      OR recipes.body LIKE :q 
+      OR users.username LIKE :q
+      OR recipes.title_kana LIKE :q",
+      q: "%#{hira}%"
+    )
   end
 
   scope :latest, -> { order(updated_at: :desc) }
   scope :oldest, -> { order(updated_at: :asc) }
   scope :most_favorited, -> { order(favorites_count: :desc) }
 
-  
+  before_save :set_kana
+
 private
 
   def image_presence
     errors.add(:image,"を選択してください") unless image.attached?
+  end
+
+  def set_kana
+    return if title.blank?
+
+    self.title_kana = Moji.kata_to_hira(title)
   end
 
 end

@@ -151,6 +151,7 @@ GEM
     matrix (0.4.3)
     mini_mime (1.1.5)
     minitest (5.27.0)
+    moji (1.6)
     msgpack (1.8.0)
     mutex_m (0.3.0)
     net-imap (0.5.13)
@@ -290,6 +291,7 @@ DEPENDENCIES
   error_highlight (>= 0.4.0)
   importmap-rails
   jbuilder
+  moji
   puma (>= 5.0)
   rails (~> 7.1.6)
   selenium-webdriver
