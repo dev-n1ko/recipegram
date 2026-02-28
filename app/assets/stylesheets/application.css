@@ -176,6 +176,15 @@
   height: 28px;
   border-radius: 50%;
   object-fit: cover;
+  display: block;
+}
+
+.follower-avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 /* 下書きレシピ用　*/
@@ -195,4 +204,41 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
+}
+
+/* フォロー数表記　*/
+.follow-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.follow-item {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0 30px;
+  transition: opacity 0.2s ease;
+}
+
+.follow-item:not(:last-child) {
+  border-right: 1px solid #ddd;
+}
+
+.follow-item:hover {
+  opacity: 0.6;
+}
+
+.count {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  color: #777;
+  margin-top: 4px;
 }

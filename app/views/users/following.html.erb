@@ -1,20 +1,45 @@
-<h2><%= @user.username %> がフォローしているユーザー</h2>
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <%= @user.username %> がフォローしているユーザー
+      </h1>
+    </div>
+  </div>
+</section>
 
-<% if @users.any? %>
-  <% @users.each do |user| %>
-    <%= link_to user_path(user), class: "is-flex is-align-items-center user-link" do %>
-      <% if user.image.attached? %>
-        <%= image_tag user.image, class: "favorite-avatar mr-2" %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <div class="column is-3">
+            <div class="card" style="height:100%;">
+              <div class="card-content">
+                <figure class="profile_image">
+                  <%= link_to user_path(user), class: "is-flex is-align-items-center user-link" do %>
+                    <% if user.image.attached? %>
+                      <%= image_tag user.image, style: "follower-avatar mr-2" %>
+                    <% else %>
+                      <%= image_tag "no-image.png", class: "follower-avatar mr-2" %>
+                    <% end %>  
+                  <% end %>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <div class="title"><%=link_to user.username, user_path(user) %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% else %>
-        <%= image_tag "no-image.png", class: "favorite-avatar mr-2" %>
-      <% end %>  
-      
-      <span >
-        <%= user.username %>
-      </span>
-
-    <% end %>
-  <% end %>
-<% else %>
-  まだいません
-<% end %>
+        まだいません
+      <% end %>
+    </div>
+  </div>
+</section>

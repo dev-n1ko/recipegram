@@ -67,12 +67,12 @@ class UsersController < ApplicationController
 
   def followers
     @user = User.find(params[:id])
-    @users = @user.followers.includes(image_attachment: :blob)
+    @users = @user.followers.with_attached_image
   end
 
   def following
     @user = User.find(params[:id])
-    @users = @user.following.includes(image_attachment: :blob)
+    @users = @user.following.with_attached_image
   end
 
   private

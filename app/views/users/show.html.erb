@@ -81,8 +81,17 @@
               <% end %>
             <% end %>
 
-            <%= link_to "フォロー中 #{@user.following_count}", following_user_path(@user) %>
-            <%= link_to "フォロワー #{@user.followers_count}", followers_user_path(@user) %>
+            <div class="follow-stats">
+              <%= link_to following_user_path(@user), class: "follow-item" do %>
+                <span class="count"><%= @user.following_count %></span>
+                <span class="label">フォロー中</span>
+              <% end %>
+
+              <%= link_to followers_user_path(@user), class: "follow-item" do %>
+                <span class="count"><%= @user.followers_count %></span>
+                <span class="label">フォロワー</span>
+              <% end %>
+            </div>
 
             <table class="table is-fullwidth">
               <tr>
