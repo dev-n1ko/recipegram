@@ -49,4 +49,13 @@ class User < ApplicationRecord
     following.include?(user)
   end
   
+  def self.search(keyword)
+    return all if keyword.blank?
+
+    hira = Moji.kata_to_hira(keyword)
+
+    where("users.username LIKE :q",
+      q: "%#{hira}%"
+    )
+  end
 end

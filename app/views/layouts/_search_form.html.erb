@@ -1,0 +1,22 @@
+<!-- 検索バー（中央寄せ） -->
+<div class="navbar-item is-expanded">
+  <div class="navbar-item is-flex-grow-1 is-justify-content-center">
+    <%= form_with url: url, method: :get, local: true, class: "field has-addons search-form" do |f| %>
+
+      <div class="control has-icons-left is-expanded">
+        <%= f.text_field :keyword,
+              value: params[:keyword],
+              placeholder: "検索キーワード",
+              class: "input is-rounded" %>      
+        <span class="icon is-left">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+      
+      <div class="control">
+        <%= f.submit "検索", class: "button is-info is-rounded" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

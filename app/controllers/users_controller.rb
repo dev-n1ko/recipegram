@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User
+    .search(params[:keyword])
     .with_attached_image
-    .all
   end
 
   def show
@@ -18,9 +18,9 @@ class UsersController < ApplicationController
                             .includes(user: { image_attachment: :blob })
     
     if @user == current_user 
-      recipes = @user.recipes.with_attached_image 
+      recipes = @user.recipes.with_attached_image.search(params[:keyword]) 
     else 
-      recipes = @user.recipes.published.with_attached_image 
+      recipes = @user.recipes.published.with_attached_image.search(params[:keyword])
     end 
 
     @recipes = case params[:sort]
@@ -31,9 +31,6 @@ class UsersController < ApplicationController
              else
                recipes.latest
              end
-              
-
-
   end
 
   def edit

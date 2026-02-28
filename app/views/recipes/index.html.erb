@@ -8,6 +8,8 @@
   </div>
 </section>
 
+<%= render "layouts/search_form", url: recipes_path, button_label: "レシピ検索" %>
+
 <% if params[:keyword].present? %>
   <h2 class="title is-4">
     「<%= params[:keyword] %>」の検索結果
