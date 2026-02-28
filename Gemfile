@@ -46,6 +46,8 @@ gem "bootsnap", require: false
 
 gem 'devise'
 
+gem 'devise-i18n'
+
 gem 'moji'
 
 group :development, :test do
@@ -66,6 +68,8 @@ group :development do
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 
   gem "bullet"
+
+  gem "letter_opener"
 end
 
 group :test do

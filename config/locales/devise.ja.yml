@@ -20,6 +20,10 @@ ja:
       user:
         invalid: "メールアドレスまたはパスワードが違います。"
 
+    mailer:
+      confirmation_instructions:
+        subject: "【Recipegram】メールアドレス確認のお願い"
+
     registrations:
       signed_up: "ユーザー登録が完了しました"
     

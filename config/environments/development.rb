@@ -93,4 +93,7 @@ Rails.application.configure do
       association: :preview_image_attachment
   end
 
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+
 end

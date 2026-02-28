@@ -1,25 +1,90 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        パスワード再設定画面
+      </h1>
+    </div>
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <%= f.hidden_field :reset_password_token %>
+
+          <div class="field">
+            <%= f.label :password, "新しいパスワード" %>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> 文字以上)</em><br />
+            <% end %>
+
+            <p class="control has-icons-left has-icons-right" data-controller="pw">
+              <%= f.password_field :password, 
+                    autofocus: true, 
+                    autocomplete: "new-password",
+                    placeholder: "password", 
+                    class: input_class(resource, :password),
+                    data: { pw_target: "input" } %>
+              
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+
+              <button type="button"
+                class="icon is-small is-right password-toggle"
+                data-action="click->pw#toggle"
+                data-pw-target="icon"
+                aria-label="パスワードを表示">
+                <i class="fas fa-eye"></i>
+              </button>
+            </p>
+
+            <p class="help is-danger">
+              <%= resource.errors.full_messages_for(:password).first || "&nbsp;".html_safe %>
+            </p>
+
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation, "確認のため再入力" %>
+
+            <p class="control has-icons-left has-icons-right" data-controller="pw">
+              <%= f.password_field :password_confirmation, 
+                    autocomplete: "new-password",
+                    placeholder: "password", 
+                    class: input_class(resource, :password),
+                    data: { pw_target: "input" } %>
+
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+
+              <button type="button"
+                class="icon is-small is-right password-toggle"
+                data-action="click->pw#toggle"
+                data-pw-target="icon"
+                aria-label="パスワードを表示">
+                <i class="fas fa-eye"></i>
+              </button>
+            </p>
+
+            <p class="help is-danger">
+              <%= resource.errors.full_messages_for(:password).first || "&nbsp;".html_safe %>
+            </p>
+
+          </div>
+
+          <div class="actions">
+            <%= f.submit "パスワード変更" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>
