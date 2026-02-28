@@ -5,10 +5,12 @@ export default class extends Controller {
 
   open() {
     this.windowTarget.classList.add("is-active")
+    document.documentElement.classList.add("is-clipped")
   }
 
   close() {
     this.windowTarget.classList.remove("is-active")
+    document.documentElement.classList.remove("is-clipped")
   }
 
   backgroundClose(event) {
