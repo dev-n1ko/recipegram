@@ -19,7 +19,9 @@
             </figure>
           </div>
           <div class="card-content">
-            <%= render "favorite", recipe: @recipe %>
+            <div class="has-text-right">
+              <%= render "favorite", recipe: @recipe %>
+            </div>
 
             <div class="media">
               <div class="media-content">
